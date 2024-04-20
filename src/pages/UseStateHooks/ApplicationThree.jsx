@@ -1,13 +1,37 @@
 import React, { useState } from 'react'
 
-const ApplicationTwo = () => {
+const ApplicationThree = () => {
 
   const [user, setUser] = useState({id: '', email: ''});
   const [userList, setUserList] = useState([]);
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    setUserList([...userList, user]);
-    setUser({id: '', email: ''});
+    if (isExistEmail(user.email)) {
+        alert('Email is already exist');
+    } else if (isExistId(user.id)) {
+        alert('Id is already exist');
+    } else {
+        setUserList([...userList, user]);
+        setUser({id: '', email: ''});
+    }
+  }
+
+  const isExistEmail = (emailParam) => {
+    let isExist = false;
+    if (userList.length === 0) {
+        return false;
+    }
+    isExist = userList.find((value) => value.email === emailParam);
+    return isExist;
+  }
+
+  const isExistId = (idParam) => {
+    let isExist = false;
+    if (userList.length === 0) {
+        return false;
+    }
+    isExist = userList.find((value) => value.id === idParam);
+    return isExist;
   }
 
   return (
@@ -16,7 +40,7 @@ const ApplicationTwo = () => {
         <div className='col-md-6'>
           <div className='card'>
             <div className='card-header'>
-              <strong>Application #2</strong>
+              <strong>Application #3</strong>
             </div>
             <div className='card-body'>
               <form onSubmit={handleFormSubmit}>
@@ -72,4 +96,4 @@ const ApplicationTwo = () => {
   )
 }
 
-export default ApplicationTwo
+export default ApplicationThree

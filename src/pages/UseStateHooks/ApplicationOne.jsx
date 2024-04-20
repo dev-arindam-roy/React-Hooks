@@ -22,7 +22,7 @@ const ApplicationOne = () => {
       <div className='row'>
         <div className='col-md-12'>
           <div className='card'>
-            <div className='card-header'><strong>Deal With Textbox</strong></div>
+            <div className='card-header'><strong>Application #1</strong></div>
             <div className='card-body'>
               <form onSubmit={submitHandler}>
                 <div className='form-group mb-3'>

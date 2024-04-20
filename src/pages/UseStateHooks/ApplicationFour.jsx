@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 
-const ApplicationTwo = () => {
+const cities = ['Kolkata', 'Delhi', 'Mumbai', 'Karala', 'Pune', 'Bangalore'];
 
-  const [user, setUser] = useState({id: '', email: ''});
+const ApplicationFour = () => {
+
+  const [user, setUser] = useState({name: '', city: ''});
   const [userList, setUserList] = useState([]);
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setUserList([...userList, user]);
-    setUser({id: '', email: ''});
+    setUser({name: '', city: ''});
   }
 
   return (
@@ -16,17 +18,27 @@ const ApplicationTwo = () => {
         <div className='col-md-6'>
           <div className='card'>
             <div className='card-header'>
-              <strong>Application #2</strong>
+              <strong>Application #4</strong>
             </div>
             <div className='card-body'>
               <form onSubmit={handleFormSubmit}>
                 <div className='form-group mb-2'>
-                  <label htmlFor='id'>User ID:</label>
-                  <input type='text' name='user_id' id='id' className='form-control' placeholder='User Id' required value={user.id} onChange={(e) => setUser({ ...user, id: e.target.value })} />
+                  <label htmlFor='name'>Name:</label>
+                  <input type='text' name='name' id='name' className='form-control' placeholder='Name' required value={user.name} onChange={(e) => setUser({ ...user, name: e.target.value })} />
                 </div>
                 <div className='form-group mb-2'>
-                  <label htmlFor='email'>Email ID:</label>
-                  <input type='email' name='email' id='email' className='form-control' placeholder='Email Id' required value={user.email} onChange={(e) => setUser({...user, email: e.target.value})} />
+                  <label htmlFor='city'>City:</label>
+                  <select className='form-select' id='city' name='city' value={user.city} onChange={(e) => setUser({...user, city: e.target.value})}>
+                    <option value="">-City-</option>
+                    {
+                        cities.length > 0 &&
+                        cities.map((value, index) => {
+                            return (
+                                <option key={index} value={value}>{value}</option>
+                            )
+                        })
+                    }
+                  </select>
                 </div>
                 <div className='form-group mt-3'>
                   <button type='submit' className='btn btn-primary'>Add To List</button>
@@ -35,10 +47,10 @@ const ApplicationTwo = () => {
             </div>
             <div className='card-footer'>
               <p>
-                <strong>ID:</strong> {user.id}
+                <strong>Name:</strong> {user.name}
               </p>
               <p>
-                <strong>Email:</strong> {user.email}
+                <strong>City:</strong> {user.city}
               </p>
             </div>
           </div>
@@ -54,8 +66,7 @@ const ApplicationTwo = () => {
                 userList.map((value, index) => {
                   return (
                     <li key={index}>
-                      <strong>ID: {value.id}</strong> <br/> 
-                      <span className='mx-4'>{value.email}</span>
+                      <strong>{index + 1}:</strong> {value.name} @ {value.city}
                     </li>
                   )
                 })
@@ -72,4 +83,4 @@ const ApplicationTwo = () => {
   )
 }
 
-export default ApplicationTwo
+export default ApplicationFour
